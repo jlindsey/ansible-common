@@ -1,0 +1,18 @@
+---
+- name: Upload etckeeper config
+  copy: src=etckeeper.conf
+        dest=/etc/etckeeper/etckeeper.conf
+        mode=0644
+
+- name: Init etckeeper
+  command: etckeeper init
+  args:
+    creates: /etc/.git
+  register: etckeeper
+
+- name: etckeeper initial commit
+  command: git commit -m "Initial commit"
+  args:
+    chdir: /etc
+  when: etckeeper.changed
+

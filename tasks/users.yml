@@ -1,0 +1,12 @@
+---
+- name: Create login user
+  user: name={{login_user}}
+        shell=/bin/bash
+        groups='sudo'
+        append=yes
+        password="{{user_pass_shadow}}"
+
+- name: Add login user public key
+  authorized_key: user={{login_user}}
+                  key="{{user_public_key}}"
+

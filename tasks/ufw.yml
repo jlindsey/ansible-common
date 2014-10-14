@@ -1,0 +1,22 @@
+---
+- name: UFW defaults
+  shell: ufw default deny incoming && ufw default allow outgoing && touch /var/lock/UFW_DEFAULTS_SET
+  args:
+    creates: /var/lock/UFW_DEFAULTS_SET
+  notify: reload ufw
+
+- name: Setup UFW for SSH
+  ufw: rule=allow name='{{item}}' state=enabled
+  with_items:
+    - OpenSSH
+    - mosh
+
+- name: Setup UFW for web
+  ufw: rule=allow port={{item}} proto=tcp state=enabled
+  with_items:
+    - http
+    - https
+
+- name: Limit SSH DDOS
+  ufw: rule=limit port=ssh proto=tcp
+

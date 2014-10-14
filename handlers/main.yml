@@ -1,0 +1,9 @@
+---
+- name: etckeeper initial commit
+  command: git commit -m "Initial commit"
+  args:
+    chdir: /etc
+
+- name: reload ufw
+  command: ufw reload
+

@@ -1,0 +1,21 @@
+---
+- name: Install common packages
+  apt: name={{item}} update_cache=yes
+  with_items:
+    - htop
+    - fail2ban
+    - curl
+    - wget
+    - unzip
+    - git
+    - etckeeper
+    - vim
+    - python-software-properties
+    - ufw
+
+- name: Add mosh PPA
+  apt_repository: repo='ppa:keithw/mosh'
+
+- name: Install mosh
+  apt: name=mosh
+
