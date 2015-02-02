@@ -3,4 +3,5 @@
 - include: etckeeper.yml
 - include: users.yml
 - include: ufw.yml
+- include: papertrail.yml
 

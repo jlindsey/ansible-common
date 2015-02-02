@@ -1,0 +1,20 @@
+---
+- name: Install rsyslog-gnutls
+  apt: name=rsyslog-gnutls
+
+- name: Download papertrail pem
+  get_url: dest=/etc/papertrail-bundle.pem
+           url=https://papertrailapp.com/tools/papertrail-bundle.pem
+           sha256sum=c03a504397dc45b4fc05f978dbf02129793cbd2a0b64856c2ba1bb49a3b9aacb
+           mode=0644
+
+- name: Install papertrail rsyslog conf
+  copy: src=papertrail_rsyslog.conf
+        dest=/etc/rsyslog.d/10-papertrail.conf
+        mode=0644
+  register: rsyslog
+
+- name: Restart rsyslog
+  command: /etc/init.d/rsyslog restart
+  when: rsyslog.changed
+
