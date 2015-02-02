@@ -4,5 +4,5 @@ $ActionSendStreamDriverMode 1 # require TLS
 $ActionSendStreamDriverAuthMode x509/name # authenticate by hostname
 $ActionSendStreamDriverPermittedPeer *.papertrailapp.com
 
-*.*   @@logs2.papertrailapp.com:43614
+*.*   @@{{papertrail_host}}:{{papertrail_port}}
 

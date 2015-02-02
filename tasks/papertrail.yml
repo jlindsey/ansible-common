@@ -9,9 +9,9 @@
            mode=0644
 
 - name: Install papertrail rsyslog conf
-  copy: src=papertrail_rsyslog.conf
-        dest=/etc/rsyslog.d/10-papertrail.conf
-        mode=0644
+  template: src=papertrail_rsyslog.conf
+            dest=/etc/rsyslog.d/10-papertrail.conf
+            mode=0644
   register: rsyslog
 
 - name: Restart rsyslog
