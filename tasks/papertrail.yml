@@ -15,6 +15,6 @@
   register: rsyslog
 
 - name: Restart rsyslog
-  command: /etc/init.d/rsyslog restart
+  service: name=rsyslog state=restarted
   when: rsyslog.changed
 
